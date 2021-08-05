@@ -1,0 +1,29 @@
+﻿@model Owner
+
+<div>
+    <form method="post" asp-action="@ViewBag.Action">
+        <h2>Добавление/редактирование записи</h2>
+        <input type="hidden" asp-for="Id" />
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="FirstName">Имя</label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="LastName">Фамилия</label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Gender">Пол</label>
+            <select asp-for="Gender" class="form-control">
+                <option value="0">Мужской</option>
+                <option value="1">Женский</option>
+            </select>
+        </div>
+        <div class="text-center">
+            <input class="btn btn-primary m-1" type="submit" value="Сохранить" />
+        </div>
+    </form>
+</div>

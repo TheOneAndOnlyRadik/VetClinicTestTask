@@ -1,0 +1,43 @@
+﻿@model Pet
+@inject IRepository<Species> SpeciesRepo
+@inject IRepository<Owner> OwnerRepo
+
+<div>
+    <form method="post" asp-action="@ViewBag.Action">
+        <input type="hidden" asp-for="Id" />
+        <h2>Добавление/редактирование записи</h2>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Name">Имя</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Gender">Пол</label>
+            <select asp-for="Gender" class="form-control">
+                <option value="0">Самец</option>
+                <option value="1">Самка</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Age">Возраст</label>
+            <input asp-for="Age" class="form-control" />
+            <span asp-validation-for="Age" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="SpeciesId">Вид</label>
+            <select class="form-control" asp-for="SpeciesId" asp-items="SpeciesRepo.GetSelectList()">
+                <option value="">Выберите вид</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="OwnerId">Хозяин</label>
+            <select class="form-control" asp-for="OwnerId" asp-items="OwnerRepo.GetSelectList()">
+                <option value="">Выберите хозяина</option>
+            </select>
+        </div>
+        <div class="text-center">
+            <input class="btn btn-primary m-1" type="submit" value="Сохранить" />
+        </div>
+    </form>
+</div>

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<PerformedService>
+
+<h2>Оказанные услуги</h2>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th class="text-center">#</th>
+            <th>Дата и время</th>
+            <th>Количество</th>
+            <th>Услуга</th>
+            <th>Животное</th>
+            <th>Доктор</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td class="text-center">
+                <b>@item.Id</b>
+            </td>
+            <td>@item.DateTime</td>
+            <td>@item.Quantity</td>
+            <td>@item.Service?.Name</td>
+            <td>@item.Pet?.Name</td>
+            <td>@item.Doctor?.FullName</td>
+            <td class="text-center">
+                <div class="btn-group">
+                    <a class="btn btn-warning m-1" asp-action="Edit" asp-route-id="@item.Id">
+                        <i class="fa fa-pen" aria-hidden="true"></i>
+                    </a>
+                    <form class="m-1" method="get" asp-action="Delete">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<div class="card-footer text-center">
+    <a class="btn btn-outline-primary" asp-action="Add">Добавить запись</a>
+</div>

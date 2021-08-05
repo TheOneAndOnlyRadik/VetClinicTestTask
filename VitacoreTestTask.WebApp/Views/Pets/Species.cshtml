@@ -1,0 +1,39 @@
+﻿@model Species
+@inject IRepository<Species> SpeciesRepo
+
+<h2>Виды животных</h2>
+
+<div>
+    <form method="post" asp-action="AddSpecies">
+        <div class="form-group m-1">
+            <label asp-for="Name">Наименование</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="m-1">
+            <input class="btn btn-primary" type="submit" value="Добавить" />
+        </div>
+    </form>
+</div>
+
+<div class="m-1">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th class="text-center">#</th>
+                <th>Наименование</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in SpeciesRepo.GetAll())
+            {
+                <tr>
+                    <td class="text-center">
+                        <b>@item.Id</b>
+                    </td>
+                    <td>@item.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

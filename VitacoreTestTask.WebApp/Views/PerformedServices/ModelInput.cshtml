@@ -1,0 +1,43 @@
+﻿@model PerformedService
+@inject IRepository<Service> ServiceRepo
+@inject IRepository<Pet> PetRepo
+@inject IRepository<Doctor> DoctorRepo
+
+<div>
+    <form method="post" asp-action="@ViewBag.Action">
+        <h2>Добавление/редактирование записи</h2>
+        <input type="hidden" asp-for="Id" />
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="DateTime">Дата и время</label>
+            <input asp-for="DateTime" class="form-control" />
+            <span asp-validation-for="DateTime" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Quantity">Количество</label>
+            <input asp-for="Quantity" class="form-control" />
+            <span asp-validation-for="Quantity" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ServiceId">Услуга</label>
+            <select class="form-control" asp-for="ServiceId" asp-items="ServiceRepo.GetSelectList()">
+                <option value="">Выберите услугу</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="PetId">Животное</label>
+            <select class="form-control" asp-for="PetId" asp-items="PetRepo.GetSelectList()">
+                <option value="">Выберите животное</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="DoctorId">Доктор</label>
+            <select class="form-control" asp-for="DoctorId" asp-items="DoctorRepo.GetSelectList()">
+                <option value="">Выберите доктора</option>
+            </select>
+        </div>
+        <div class="text-center">
+            <input class="btn btn-primary m-1" type="submit" value="Сохранить" />
+        </div>
+    </form>
+</div>
